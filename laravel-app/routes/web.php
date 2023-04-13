@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\SuperadminMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,35 +18,28 @@ use App\Http\Controllers\UserController;
 Route::redirect('/', 'login');
 
 Route::get('/dashboard', function () {
+    if (auth()->user()->is_admin) {
+        return redirect()->route('users.index');
+    }
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Prikaz svih korisnika
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-
-// Forma za kreiranje novog korisnika
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-
-// Kreiranje novog korisnika
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
-
-// Prikaz detalja o korisniku
-Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-
-// Forma za editovanje korisnika
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-
-// Editovanje postojećeg korisnika
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-
-// Brisanje postojećeg korisnika
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::group(['middleware' => ['auth', SuperadminMiddleware::class]], function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 

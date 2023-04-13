@@ -11,8 +11,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $users = User::all();
+    { $users = User::where('is_admin', false)->get();
 
         return view('users.index', compact('users'));
     }
