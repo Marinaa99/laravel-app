@@ -17,4 +17,6 @@ class SuperadminSeeder extends Seeder
             'password' => bcrypt('11'),
         ]);
     }
+
+
 }
