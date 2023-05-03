@@ -11,11 +11,12 @@ class SuperadminSeeder extends Seeder
      */
     public function run(): void
     {
+
         $superAdmin = new User;
         $superAdmin->name = 'Admin';
         $superAdmin->email = 'admin@example.com';
         $superAdmin->password = bcrypt('admin//');
-        $superAdmin->is_admin = 1;
+        $superAdmin->is_admin = true;
         $superAdmin->save();
     }
 }

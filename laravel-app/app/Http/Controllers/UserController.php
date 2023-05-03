@@ -30,7 +30,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-
+        $user->is_admin = false;
         $user->save();
 
         return redirect('/users');

@@ -29,7 +29,7 @@
                                 <label for="name" class="block font-medium text-sm text-gray-700">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full" @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full" @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="text-sm text-red-600" role="alert">
