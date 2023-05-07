@@ -13,13 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"  class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
-                        {{ __('Dashboard') }}
+                        {{ __('Friends Requests') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="{{ auth()->user()->is_admin ? '' : 'hidden' }}">
                       Users
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('friends.non-friends')" :active="request()->routeIs('friends.non-friends')" class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
+                        Friends
                     </x-nav-link>
                 </div>
             </div>

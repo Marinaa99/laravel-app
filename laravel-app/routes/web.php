@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FriendController;
 use App\Http\Middleware\SuperadminMiddleware;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,14 @@ Route::group(['middleware' => ['auth', SuperadminMiddleware::class]], function (
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
+
+
+Route::get('/friends/non-friends', [FriendController::class, 'showNonFriends'])->name('friends.non-friends');
+Route::post('/add-friend/{id}', [FriendController::class, 'addFriend'])->name('add-friend');
+Route::get('/dashboard', [FriendController::class, 'showFriendRequests'])->name('dashboard');
+Route::post('dashboard/{friendship_id}', [FriendController::class, 'acceptFriendRequest'])->name('dashboard.acceptFriendRequest');
+
+
 
 
 
