@@ -1,6 +1,7 @@
+
 <x-app-layout>
 
-    <div class="container">
+
     <div class="mt-2">
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
 
@@ -20,31 +21,19 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
 
-                                @foreach ($users as $user)
+                                @foreach ($friends as $friend)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->id }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->email }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $friend->id }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $friend->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $friend->email }}</td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
 
 
                                             <div class="flex justify-left text-left">
-                                                @php($friendshipStatus = app('App\Http\Controllers\FriendController')->getFriendshipStatus($user->id))
-                                                @if($friendshipStatus === 'pending')
-                                                    <span class="text-indigo-600"> PENDING REQUEST</span>
-                                                @elseif($friendshipStatus === 'accepted')
-                                                    <span class="text-green-600"> FRIENDS</span>
-                                                @elseif($friendshipStatus === 'rejected')
-                                                    <span class="text-red-600"> REJECTED</span>
 
+                                                <a href="{{ route('messages.create', ['friend_id' => $friend->id]) }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">MESSAGES</a>
 
-                                                @else
-                                                    <form action="{{ route('add-friend', $user->id) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Add Friend</button>
-                                                    </form>
-                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -52,7 +41,7 @@
                                 </tbody>
                             </table>
                             <div class="p-4">
-                                {{ $users->links() }}
+                                {{ $friends->links() }}
                             </div>
                         </div>
                     </div>
@@ -62,7 +51,5 @@
     </div>
 
 
-</div>
+
 </x-app-layout>
-
-

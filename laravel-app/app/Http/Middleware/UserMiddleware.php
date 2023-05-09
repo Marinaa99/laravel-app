@@ -6,16 +6,16 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SuperadminMiddleware
+class UserMiddleware
 {
     public function handle($request, Closure $next)
     {
 
-     if (!auth()->check() || !auth()->user()->is_admin){
+        if (!auth()->check() || !auth()->user()->user){
 
-         abort(403);
-     }
-     return $next($request);
+            abort(403);
+        }
+        return $next($request);
     }
 
 }

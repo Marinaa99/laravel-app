@@ -48,8 +48,18 @@ class User extends Authenticatable
 
     public function friends()
     {
-        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id')->withPivot('status');
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id')
+            ->wherePivot('status', Friend::ACCEPTED);
     }
+
+
+
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
 
 
 

@@ -11,6 +11,7 @@ class Friend extends Model
     const ACCEPTED = 'accepted';
     const REJECTED = 'rejected';
 
+
     protected $fillable = [
         'user_id',
         'friend_id',
@@ -21,12 +22,7 @@ class Friend extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function friend()
-    {
-        return $this->belongsTo(Friend::class, 'friend_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 

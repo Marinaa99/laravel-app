@@ -4,18 +4,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
+
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"  class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
-                        {{ __('Friends Requests') }}
-                    </x-nav-link>
-                </div>
+
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="{{ auth()->user()->is_admin ? '' : 'hidden' }}">
@@ -25,7 +17,19 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('friends.non-friends')" :active="request()->routeIs('friends.non-friends')" class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
-                        Friends
+                        Dashboard
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('friends.requests')" :active="request()->routeIs('friends.requests')"  class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
+                        {{ __('Friends Requests') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('friends.friends')" :active="request()->routeIs('friends.friends')" class="{{ auth()->user()->is_admin ? 'hidden' : '' }}">
+                      Friends
                     </x-nav-link>
                 </div>
             </div>
@@ -77,9 +81,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
